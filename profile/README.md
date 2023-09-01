@@ -9,3 +9,4 @@
 ### What We Can't Do&ensp;<sub><img height="32" alt="image" src="https://github.com/KessokuTeaTime/.github/assets/68179735/c3360830-7261-4b0f-a9a9-b466f1c6fb2c"></sub>
 
 - Sing.
+- Become the most popular band in Shimokitazawa.
