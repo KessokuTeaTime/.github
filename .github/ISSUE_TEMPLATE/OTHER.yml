@@ -1,10 +1,7 @@
 name: Other (Low Priority)
+description: This issue will have no limitations but with a low priority
 labels: ["low priority"]
 body:
-  - type: markdown
-    attributes:
-      value: |
-        This issue will have no limitations but with a low priority.
   - type: textarea
     id: other
     attributes:
