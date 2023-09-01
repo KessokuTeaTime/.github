@@ -7,5 +7,7 @@ body:
         This issue will have no limitations but with a low priority.
   - type: textarea
     id: other
+    attributes:
+      label: Write Something Here
     validations:
       required: true
