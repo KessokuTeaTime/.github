@@ -1,0 +1,11 @@
+name: Other (Low Priority)
+labels: ["low priority"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This issue will have no limitations but with a low priority.
+  - type: textarea
+    id: other
+    validations:
+      required: true
