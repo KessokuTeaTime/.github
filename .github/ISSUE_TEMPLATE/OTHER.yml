@@ -4,5 +4,7 @@ labels: ["low priority"]
 body:
   - type: textarea
     id: other
+    attributes:
+      label: Issue
     validations:
       required: true
