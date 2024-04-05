@@ -1,6 +1,16 @@
 name: Publish Release
 
-on: [ workflow_call ]
+on: 
+  workflow_call:
+    secrets:
+      GITHUB_TOKEN:
+        required: true
+      MODRINTH_TOKEN:
+        required: true
+      CURSEFORGE_TOKEN:
+        required: true
+
+
 
 permissions:
   contents: write
