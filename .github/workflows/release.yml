@@ -27,7 +27,7 @@ jobs:
             ~/.gradle/caches
             ~/.gradle/wrapper
             .gradle
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle.kts*', '**/gradle-wrapper.properties', 'build.gradle.kts') }}
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle.kts*', '**/*.gradle*', '**/gradle-wrapper.properties', 'build.gradle.kts', 'build.gradle') }}
       - uses: gradle/wrapper-validation-action@v1
       - run: |
           chmod +x gradlew
