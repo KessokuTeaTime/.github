@@ -1,12 +1,12 @@
 name: Publish Release
 
-on: [ release, workflow_dispatch ]
+on: [ release, workflow_dispatch, workflow_call ]
 
 permissions:
   contents: write
 
 jobs:
-  Publish:
+  publish-release:
     runs-on: ubuntu-latest
 
     steps:
