@@ -1,9 +1,9 @@
 name: Build
 
-on: [ pull_request, push, workflow_dispatch ]
+on: [ pull_request, push, workflow_dispatch, workflow_call ]
 
 jobs:
-  Build:
+  build:
     runs-on: ubuntu-22.04
 
     steps:
