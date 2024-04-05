@@ -3,11 +3,11 @@ name: Publish Release
 on: 
   workflow_call:
     secrets:
-      GITHUB_TOKEN:
+      GITHUB:
         required: true
-      MODRINTH_TOKEN:
+      MODRINTH:
         required: true
-      CURSEFORGE_TOKEN:
+      CURSEFORGE:
         required: true
 
 
@@ -39,6 +39,6 @@ jobs:
           chmod +x gradlew
           ./gradlew build publishMod --stacktrace -Porg.gradle.parallel.threads=4
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
-          CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB }}
+          MODRINTH_TOKEN: ${{ secrets.MODRINTH }}
+          CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE }}
