@@ -25,7 +25,7 @@ jobs:
             ~/.gradle/wrapper
             .gradle
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle.kts*', '**/*.gradle*', '**/gradle-wrapper.properties', 'build.gradle.kts', 'build.gradle') }}
-      - uses: gradle/wrapper-validation-action@v4
+      - uses: gradle/wrapper-validation-action@v2
       - run: |
           chmod +x gradlew
           ./gradlew build publishMod --stacktrace -Porg.gradle.parallel.threads=4
