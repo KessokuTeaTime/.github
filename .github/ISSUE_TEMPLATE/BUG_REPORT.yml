@@ -22,7 +22,7 @@ body:
     id: minecraft-version
     attributes:
       label: "Minecraft Version"
-      placeholder: "E.g., `1.20`"
+      placeholder: "E.g., 1.20"
   - type: textarea
     id: what-happened
     attributes:
