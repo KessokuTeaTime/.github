@@ -23,6 +23,8 @@ body:
     attributes:
       label: "Minecraft Version"
       placeholder: "E.g., 1.20"
+    validations:
+      required: true
   - type: textarea
     id: what-happened
     attributes:
