@@ -8,10 +8,17 @@ body:
       value: |
         Thanks for taking the time to fill out this feature propose!
   - type: textarea
+    id: feature-description
+    attributes:
+      label: "Feature Description"
+      description: Inform us your expectations.
+    validations:
+      required: true
+  - type: textarea
     id: propose-reason
     attributes:
-      label: Propose Reason?
+      label: "Propose Reason"
       description: Inform us your reason to propose the feature.
-      placeholder: E.g., implementing this feature would greatly improve user experience in these ways...
+      placeholder: E.g., implementing this feature would greatly improve user experience in the following ways...
     validations:
       required: true
