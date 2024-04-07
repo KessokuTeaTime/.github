@@ -1,5 +1,5 @@
-name: Bug Report
-description: Report a bug
+name: "Bug Report"
+description: "Report a bug"
 title: "[BUG]: "
 labels: ["bug"]
 body:
@@ -29,19 +29,19 @@ body:
     id: what-happened
     attributes:
       label: "What Happened?"
-      description: Inform us the behavior of the bug.
+      description: "Inform us the behavior of the bug."
     validations:
       required: true
   - type: textarea
     id: what-should-happen
     attributes:
       label: "What Should Happen?"
-      description: Inform us the behavior you expected.
+      description: "Inform us the behavior you expected."
   - type: textarea
     id: reproduce
     attributes:
       label: "Steps to Reproduce"
-      description: Tell us how to reproduce the bug.
+      description: "Tell us how to reproduce the bug."
       placeholder: |
         E.g.,
         1. Nevigate to ...
@@ -54,7 +54,7 @@ body:
     id: crash-log
     attributes:
       label: "Crash Log"
-      description: If crashed, please use a pastebin service(e.g., [`Ubuntu Pastebin`](https://paste.ubuntu.com)) to hold your log and paste the link below.
+      description: "If crashed, please use a pastebin service(e.g., [`Ubuntu Pastebin`](https://paste.ubuntu.com)) to hold your log and paste the link below."
   - type: textarea
     id: anything-else
     attributes:
