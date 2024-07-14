@@ -1,6 +1,6 @@
 name: "Compatibility Improvement"
 description: "Improve compatibilities with other mods"
-title: "[COMPATIBILITY]: "
+title: "[COMPATIBILITY] "
 labels: ["compatibility"]
 body:
   - type: markdown
