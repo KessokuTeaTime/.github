@@ -1,6 +1,6 @@
 name: "Feature Propose"
 description: "Propose a feature"
-title: "[FEATURE]: "
+title: "[FEATURE] "
 labels: ["feature propose"]
 body:
   - type: markdown
