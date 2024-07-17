@@ -1,0 +1,11 @@
+[versions]
+mod = "modid"
+id-modrinth = "id"
+id-curseforge = "id"
+modpublisher-version-type = "release"
+
+[libraries]
+
+[plugins]
+
+[bundles]
