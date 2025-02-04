@@ -1,0 +1,18 @@
+name: Build with Gradle
+description: Build and upload artifacts with Gradle
+
+runs:
+  using: composite
+
+  steps:
+    - name: Build with Gradle
+      shell: bash
+      run: |
+        chmod +x gradlew
+        ./gradlew build
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: Artifacts
+        path: ${{ github.workspace }}/build/libs
