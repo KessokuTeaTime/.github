@@ -1,5 +1,5 @@
 name: Feature Propose
-description: Propose a feature
+description: Propose a feature.
 title: "[FEATURE] "
 labels: ["feature propose", enhancement]
 body:
