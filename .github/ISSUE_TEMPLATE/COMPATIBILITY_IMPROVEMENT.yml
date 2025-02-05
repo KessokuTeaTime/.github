@@ -7,6 +7,7 @@ body:
     attributes:
       value: |
         Thanks for taking the time to fill out this form of compatibility improvement!
+
   - type: input
     id: mod-link
     attributes:
@@ -15,6 +16,7 @@ body:
       placeholder: E.g., https://modrinth.com/mod/fabric-api
     validations:
       required: true
+
   - type: textarea
     id: propose-reason
     attributes:
