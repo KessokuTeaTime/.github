@@ -60,7 +60,7 @@ body:
     id: crash-log
     attributes:
       label: Crash Log
-      description: If crashed, please use a pastebin service(e.g., [`Ubuntu Pastebin`](https://paste.ubuntu.com) or [`mclo.gs`](https://mclo.gs)) to hold your log and paste the link here.
+      description: If crashed, please use a pastebin service(e.g., [`Ubuntu Pastebin`](https://paste.ubuntu.com) or [`mclo.gs`](https://mclo.gs)) to hold your log and paste the **link** here.
 
   - type: textarea
     id: anything-else
