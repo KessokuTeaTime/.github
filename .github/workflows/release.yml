@@ -2,7 +2,13 @@ name: Publish Release
 
 on:
   workflow_call:
-  
+    inputs:
+      java-version:
+        description: Java version used to run Gradle
+        required: false
+        type: string
+        default: "21"
+
 permissions:
   contents: write
 
@@ -11,24 +17,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Set up JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
-          distribution: 'adopt'
-          java-version: 21
-      - name: Cache
-        uses: actions/cache@v4
+          distribution: 'temurin'
+          java-version: ${{ inputs.java-version }}
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
         with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-            .gradle
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle.kts*', '**/*.gradle*', '**/gradle-wrapper.properties', 'build.gradle.kts', 'build.gradle') }}
-      - uses: gradle/wrapper-validation-action@v2
+          cache-provider: basic
       - run: |
           chmod +x gradlew
-          ./gradlew build publishMod --stacktrace -Porg.gradle.parallel.threads=4
+          ./gradlew build publishMod --stacktrace
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
