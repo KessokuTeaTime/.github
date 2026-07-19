@@ -1,0 +1,86 @@
+name: Minecraft Visual Test
+
+on:
+  workflow_call:
+    inputs:
+      minecraft-version:
+        description: Minecraft version to launch
+        required: true
+        type: string
+      java-version:
+        description: Java version used to run Gradle and Minecraft
+        required: false
+        type: string
+        default: "21"
+      loaders:
+        description: JSON array containing fabric, neoforge, or both
+        required: false
+        type: string
+        default: '["fabric", "neoforge"]'
+      stage-task:
+        description: Loader subproject task that stages jars for the test client
+        required: false
+        type: string
+        default: stageVisualTest
+      fabric-client-gametest:
+        description: Run the staged Fabric client game test instead of the runtime smoke mod
+        required: false
+        type: boolean
+        default: false
+      neoforge-jvm-args:
+        description: Extra JVM arguments used to activate a staged NeoForge visual-test driver
+        required: false
+        type: string
+        default: ""
+
+permissions:
+  contents: read
+
+jobs:
+  visual-test:
+    name: ${{ matrix.loader }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        loader: ${{ fromJSON(inputs.loaders) }}
+
+    steps:
+      - uses: actions/checkout@v7
+      - name: Set up JDK
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: ${{ inputs.java-version }}
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
+        with:
+          cache-provider: basic
+      - name: Stage test client mods
+        run: |
+          chmod +x gradlew
+          ./gradlew ":${{ matrix.loader }}:${{ inputs.stage-task }}" --stacktrace
+          mkdir -p run/mods
+          cp build/visual-test/${{ matrix.loader }}/mods/*.jar run/mods/
+      - name: Run Minecraft client
+        uses: headlesshq/mc-runtime-test@4.5.1
+        with:
+          mc: ${{ inputs.minecraft-version }}
+          modloader: ${{ matrix.loader }}
+          regex: ${{ matrix.loader == 'fabric' && '.*fabric.*' || '.*neoforge.*' }}
+          java: ${{ inputs.java-version }}
+          mc-runtime-test: ${{ matrix.loader == 'fabric' && inputs.fabric-client-gametest && 'none' || matrix.loader }}
+          dummy-assets: false
+          xvfb: true
+          headlessmc-command: ${{ matrix.loader == 'fabric' && inputs.fabric-client-gametest && '--retries 3 --jvm "-Djava.awt.headless=true -Dfabric.client.gametest -Dfabric.client.gametest.disableNetworkSynchronizer=true"' || format('--retries 3 --jvm "-Djava.awt.headless=true {0}"', inputs.neoforge-jvm-args) }}
+      - name: Upload visual test artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-test-${{ matrix.loader }}
+          if-no-files-found: warn
+          path: |
+            run/screenshots
+            run/logs
+            run/crash-reports
