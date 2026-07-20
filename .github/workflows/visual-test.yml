@@ -73,7 +73,7 @@ jobs:
           mc-runtime-test: ${{ matrix.loader == 'fabric' && inputs.fabric-client-gametest && 'none' || matrix.loader }}
           dummy-assets: false
           xvfb: true
-          headlessmc-command: ${{ matrix.loader == 'fabric' && inputs.fabric-client-gametest && '--retries 3 --jvm "-Djava.awt.headless=true -Dfabric.client.gametest -Dfabric.client.gametest.disableNetworkSynchronizer=true"' || format('--retries 3 --jvm "-Djava.awt.headless=true {0}"', inputs.neoforge-jvm-args) }}
+          headlessmc-command: ${{ matrix.loader == 'fabric' && inputs.fabric-client-gametest && '--retries 3 --jvm -Djava.awt.headless=true --jvm -Dfabric.client.gametest --jvm -Dfabric.client.gametest.disableNetworkSynchronizer=true' || format('--retries 3 --jvm -Djava.awt.headless=true --jvm {0}', inputs.neoforge-jvm-args) }}
       - name: Upload visual test artifacts
         if: always()
         uses: actions/upload-artifact@v4
