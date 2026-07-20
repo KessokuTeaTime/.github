@@ -63,6 +63,18 @@ jobs:
           ./gradlew ":${{ matrix.loader }}:${{ inputs.stage-task }}" --stacktrace
           mkdir -p run/mods
           cp build/visual-test/${{ matrix.loader }}/mods/*.jar run/mods/
+      - name: Configure test JVM
+        env:
+          FABRIC_CLIENT_GAMETEST: ${{ inputs.fabric-client-gametest }}
+          EXTRA_NEOFORGE_ARGS: ${{ inputs.neoforge-jvm-args }}
+        run: |
+          mkdir -p HeadlessMC
+          if [ "${{ matrix.loader }}" = "fabric" ] && [ "$FABRIC_CLIENT_GAMETEST" = "true" ]; then
+            jvm_args="-Djava.awt.headless=true -Dfabric.client.gametest -Dfabric.client.gametest.disableNetworkSynchronizer=true"
+          else
+            jvm_args="-Djava.awt.headless=true $EXTRA_NEOFORGE_ARGS"
+          fi
+          printf 'hmc.jvmargs=%s\n' "$jvm_args" >> HeadlessMC/config.properties
       - name: Run Minecraft client
         uses: headlesshq/mc-runtime-test@4.5.1
         with:
@@ -73,7 +85,7 @@ jobs:
           mc-runtime-test: ${{ matrix.loader == 'fabric' && inputs.fabric-client-gametest && 'none' || matrix.loader }}
           dummy-assets: false
           xvfb: true
-          headlessmc-command: ${{ matrix.loader == 'fabric' && inputs.fabric-client-gametest && '--retries 3 --jvm -Djava.awt.headless=true --jvm -Dfabric.client.gametest --jvm -Dfabric.client.gametest.disableNetworkSynchronizer=true' || format('--retries 3 --jvm -Djava.awt.headless=true --jvm {0}', inputs.neoforge-jvm-args) }}
+          headlessmc-command: --retries 3
       - name: Upload visual test artifacts
         if: always()
         uses: actions/upload-artifact@v4
